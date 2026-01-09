@@ -98,3 +98,42 @@ export function findMax(numbers: number[]): number {
   // BUG: What happens with empty array?
   return Math.max(...numbers);
 }
+
+/**
+ * Calculate the nth Fibonacci number
+ * The Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+ * @param n The position in the Fibonacci sequence (0-indexed)
+ * @returns The nth Fibonacci number
+ * @throws {Error} If n is negative
+ * @example
+ * fibonacci(0) // returns 0
+ * fibonacci(1) // returns 1
+ * fibonacci(6) // returns 8
+ */
+export function fibonacci(n: number): number {
+  // Error handling for negative inputs
+  if (n < 0) {
+    throw new Error('Fibonacci is not defined for negative numbers');
+  }
+
+  // Error handling for non-integer inputs
+  if (!Number.isInteger(n)) {
+    throw new Error('Fibonacci is only defined for integer values');
+  }
+
+  // Base cases
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  // Iterative approach (more efficient than recursive for large n)
+  let prev = 0;
+  let curr = 1;
+
+  for (let i = 2; i <= n; i++) {
+    const next = prev + curr;
+    prev = curr;
+    curr = next;
+  }
+
+  return curr;
+}
